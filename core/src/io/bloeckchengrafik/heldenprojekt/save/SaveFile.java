@@ -14,17 +14,20 @@ import java.util.HashMap;
 @Getter
 public class SaveFile {
     private final File saveFile;
+    private final String dataDir;
     private SaveData data;
 
     @SneakyThrows
     public SaveFile() {
-        String dataDir = AppDirsFactory.getInstance()
+        dataDir = AppDirsFactory.getInstance()
                 .getUserDataDir("Heldenprojekt", "0.1", "Chris B.", true);
 
         File dataDirFile = new File(dataDir);
         if (!dataDirFile.exists()) {
             dataDirFile.mkdirs();
         }
+
+        System.setProperty("user.dir", dataDir);
 
         saveFile = new File(dataDirFile, "data.hpw");
         if (!saveFile.exists()) {

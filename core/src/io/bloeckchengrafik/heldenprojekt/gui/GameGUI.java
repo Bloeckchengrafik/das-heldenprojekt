@@ -3,6 +3,8 @@ package io.bloeckchengrafik.heldenprojekt.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,7 +17,10 @@ import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 import io.bloeckchengrafik.heldenprojekt.world.Healer;
 import io.bloeckchengrafik.heldenprojekt.world.World;
 
+import java.io.File;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.zip.Deflater;
 
 public class GameGUI implements GUI {
     private final Heldenprojekt heldenprojekt = Heldenprojekt.getInstance();
@@ -177,8 +182,8 @@ public class GameGUI implements GUI {
     }
 
     private boolean near(int x, int y, int tx, int ty) {
-        int dx = Math.abs(x-tx);
-        int dy = Math.abs(y-ty);
+        int dx = Math.abs(x - tx);
+        int dy = Math.abs(y - ty);
 
         return dx <= 1 && dy <= 1;
     }
@@ -202,7 +207,7 @@ public class GameGUI implements GUI {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             int currentTile = resolveTile(world.getTiles(), curX, curY);
 
-            if (campBlockedTiles[0] == currentTile || campBlockedTiles[1] == currentTile){
+            if (campBlockedTiles[0] == currentTile || campBlockedTiles[1] == currentTile) {
                 return;
             }
 
@@ -409,11 +414,23 @@ public class GameGUI implements GUI {
         }
 
 
-
         batch.end();
 
         if (backGUI != null) {
             backGUI.render();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
+            Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+            ByteBuffer pixels = pixmap.getPixels();
+
+            int size = Gdx.graphics.getBackBufferWidth() * Gdx.graphics.getBackBufferHeight() * 4;
+            for (int i = 3; i < size; i += 4) {
+                pixels.put(i, (byte) 255);
+            }
+
+            PixmapIO.writePNG(Gdx.files.absolute(Heldenprojekt.getInstance().getSaveFile().getDataDir() + File.separatorChar + "Screenshot-" + System.currentTimeMillis() + ".png"), pixmap, Deflater.DEFAULT_COMPRESSION, true);
+            pixmap.dispose();
         }
     }
 
@@ -447,10 +464,20 @@ public class GameGUI implements GUI {
         evilCastleTexture.dispose();
         healerTexture.dispose();
 
-        for (Texture tex : rotationAroundForestTextures) { tex.dispose();}
-        for (Texture tex : rotationAroundGrassTextures) { tex.dispose();}
-        for (Texture tex : rotationAroundMountainTextures) { tex.dispose();}
-        for (Texture tex : rotationAroundSandTextures) { tex.dispose();}
-        for (Texture tex : waterTextures) { tex.dispose();}
+        for (Texture tex : rotationAroundForestTextures) {
+            tex.dispose();
+        }
+        for (Texture tex : rotationAroundGrassTextures) {
+            tex.dispose();
+        }
+        for (Texture tex : rotationAroundMountainTextures) {
+            tex.dispose();
+        }
+        for (Texture tex : rotationAroundSandTextures) {
+            tex.dispose();
+        }
+        for (Texture tex : waterTextures) {
+            tex.dispose();
+        }
     }
 }
