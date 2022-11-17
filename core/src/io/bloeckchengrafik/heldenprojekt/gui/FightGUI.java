@@ -228,7 +228,7 @@ public class FightGUI implements GUI {
             });
         }
 
-        AtomicInteger heroHeight = new AtomicInteger(-200);
+        AtomicInteger heroHeight = new AtomicInteger((int) (-100*scale));
         AtomicReference<Float> heroDarkness = new AtomicReference<>(0.2f);
 
         for (DrawnHero hero : heroes) {
