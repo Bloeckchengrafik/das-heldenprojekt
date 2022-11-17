@@ -5,9 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
-import io.bloeckchengrafik.heldenprojekt.utils.ScaledResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
 import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 
 public class FightGUI implements GUI {
@@ -16,8 +15,8 @@ public class FightGUI implements GUI {
     private final EvilCastle evilCastle;
     private Texture[] uiTextures;
     private final BitmapFont bitmapFont = new BitmapFont();
-    private final ScaledResolution scaledResolution = new ScaledResolution((width + 2) * 64, (height + 2) * 64);
-    private final ScaledResolution inner = new ScaledResolution(0,0);
+    private final CenteredResolution scaledResolution = new CenteredResolution((width + 2) * 64, (height + 2) * 64);
+    private final CenteredResolution inner = new CenteredResolution(0,0);
     private final SpriteBatch spriteBatch = new SpriteBatch();
 
     private float scale = 1;

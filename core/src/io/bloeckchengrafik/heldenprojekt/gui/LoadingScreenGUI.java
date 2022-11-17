@@ -1,12 +1,11 @@
 package io.bloeckchengrafik.heldenprojekt.gui;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
-import io.bloeckchengrafik.heldenprojekt.utils.ScaledResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
 
 public class LoadingScreenGUI implements GUI {
     private float opacity = 0f;
@@ -17,8 +16,8 @@ public class LoadingScreenGUI implements GUI {
     private SpriteBatch batch;
     private Texture fuzzyLogo;
     private Texture heldenprojektLogo;
-    private ScaledResolution imgResolution;
-    private ScaledResolution loadingBarResolution;
+    private CenteredResolution imgResolution;
+    private CenteredResolution loadingBarResolution;
 
     private int loadingBarWidth = 0;
     private boolean fadeOut = false;
@@ -34,8 +33,8 @@ public class LoadingScreenGUI implements GUI {
         fuzzyLogo = new Texture("fuzzy-logo.png");
         heldenprojektLogo = new Texture("heldenprojekt-logo@0.5.png");
 
-        imgResolution = new ScaledResolution(fuzzyLogo.getWidth()+heldenprojektLogo.getWidth()+20, fuzzyLogo.getHeight());
-        loadingBarResolution = new ScaledResolution(400, 20);
+        imgResolution = new CenteredResolution(fuzzyLogo.getWidth()+heldenprojektLogo.getWidth()+20, fuzzyLogo.getHeight());
+        loadingBarResolution = new CenteredResolution(400, 20);
         loadingBarResolution.setMemberOffsetY(-350);
     }
 

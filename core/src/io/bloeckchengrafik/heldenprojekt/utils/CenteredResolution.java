@@ -2,10 +2,10 @@ package io.bloeckchengrafik.heldenprojekt.utils;
 
 import com.badlogic.gdx.Gdx;
 
-public class ScaledResolution {
+public class CenteredResolution {
     private int width;
     private int height;
-    private ScaledResolution container;
+    private CenteredResolution container;
 
     private int memberWidth;
     private int memberHeight;
@@ -13,7 +13,7 @@ public class ScaledResolution {
     private int memberOffsetX = 0;
     private int memberOffsetY = 0;
 
-    public ScaledResolution(int memberWidth, int memberHeight) {
+    public CenteredResolution(int memberWidth, int memberHeight) {
         this.memberWidth = memberWidth;
         this.memberHeight = memberHeight;
         // Get from LibGDX
@@ -53,7 +53,7 @@ public class ScaledResolution {
         return (height / 2 - memberHeight / 2) + memberOffsetY + containerCenterX;
     }
 
-    public ScaledResolution getContainer() {
+    public CenteredResolution getContainer() {
         return this.container;
     }
 
@@ -73,7 +73,7 @@ public class ScaledResolution {
         return this.memberOffsetY;
     }
 
-    public void setContainer(ScaledResolution container) {
+    public void setContainer(CenteredResolution container) {
         width = container.getMemberWidth();
         height = container.getMemberHeight();
         this.container = container;

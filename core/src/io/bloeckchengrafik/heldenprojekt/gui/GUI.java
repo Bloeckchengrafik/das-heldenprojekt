@@ -2,7 +2,7 @@ package io.bloeckchengrafik.heldenprojekt.gui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import io.bloeckchengrafik.heldenprojekt.utils.ScaledResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
 
 public interface GUI {
     void create();
@@ -11,7 +11,7 @@ public interface GUI {
     void dispose();
     void resize(float scale);
 
-    static void renderImageBackground(int width, int height, Texture[] uiTextures, SpriteBatch spriteBatch, ScaledResolution scaledResolution, float scale) {
+    static void renderImageBackground(int width, int height, Texture[] uiTextures, SpriteBatch spriteBatch, CenteredResolution scaledResolution, float scale) {
         int toRender = 0;
 
         // UI

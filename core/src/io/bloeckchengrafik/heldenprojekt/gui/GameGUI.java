@@ -13,7 +13,7 @@ import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
 import io.bloeckchengrafik.heldenprojekt.game.Entity;
 import io.bloeckchengrafik.heldenprojekt.game.Held;
 import io.bloeckchengrafik.heldenprojekt.save.SaveFile;
-import io.bloeckchengrafik.heldenprojekt.utils.ScaledResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
 import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 import io.bloeckchengrafik.heldenprojekt.world.World;
 import lombok.Getter;
@@ -23,11 +23,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.zip.Deflater;
 
-import static com.badlogic.gdx.math.MathUtils.lerp;
-
 public class GameGUI implements GUI {
     private final Heldenprojekt heldenprojekt = Heldenprojekt.getInstance();
-    private final ScaledResolution scaledResolution = new ScaledResolution(32 * 41, 32 * 41);
+    private final CenteredResolution scaledResolution = new CenteredResolution(32 * 41, 32 * 41);
     private final BitmapFont font = new BitmapFont();
     private final BitmapFont fontSm = new BitmapFont();
 
