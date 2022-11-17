@@ -1,5 +1,6 @@
 package io.bloeckchengrafik.heldenprojekt.gui;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -54,7 +55,7 @@ public class LoadingScreenGUI implements GUI {
 
         if (opacity == 0.0f) {
             assetManager.finishLoading();
-            heldenprojekt.setNextGUI(new MainMenuGUI());
+            heldenprojekt.setNextGUI(new GameGUI());
         }
     }
 
@@ -90,6 +91,11 @@ public class LoadingScreenGUI implements GUI {
         batch.dispose();
         fuzzyLogo.dispose();
         shapeRenderer.dispose();
+    }
+
+    @Override
+    public void resize(float scale) {
+
     }
 
     private float getLoaderPos(double deltaTime) {

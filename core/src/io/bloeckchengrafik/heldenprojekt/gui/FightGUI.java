@@ -14,12 +14,14 @@ public class FightGUI implements GUI {
     private static final int height = 10, width = 20;
     private final GameGUI gameGUI;
     private final EvilCastle evilCastle;
-    private final BitmapFont bitmapFont = new BitmapFont();
     private Texture[] uiTextures;
+    private final BitmapFont bitmapFont = new BitmapFont();
     private final ScaledResolution scaledResolution = new ScaledResolution((width + 2) * 64, (height + 2) * 64);
     private final ScaledResolution inner = new ScaledResolution(0,0);
     private final SpriteBatch spriteBatch = new SpriteBatch();
-    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+
+    private float scale = 1;
+    private float oldScale = 1;
 
     public FightGUI(GameGUI gameGUI, EvilCastle evilCastle) {
         this.gameGUI = gameGUI;
@@ -27,6 +29,8 @@ public class FightGUI implements GUI {
 
         inner.setContainer(scaledResolution);
         bitmapFont.getData().scale(2);
+
+        resize(gameGUI.getScale());
     }
 
     @Override
@@ -42,6 +46,10 @@ public class FightGUI implements GUI {
                 Heldenprojekt.getInstance().getAssetManager().get("ui-7.png"),
                 Heldenprojekt.getInstance().getAssetManager().get("ui-8.png"),
         };
+
+        bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        resize(gameGUI.getScale());
     }
 
     @Override
@@ -49,16 +57,19 @@ public class FightGUI implements GUI {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             gameGUI.returnToFront();
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+
+            }
     }
 
     @Override
     public void render() {
         spriteBatch.begin();
-
-        GUI.renderImageBackground(width, height, uiTextures, spriteBatch, scaledResolution);
+        GUI.renderImageBackground(width, height, uiTextures, spriteBatch, scaledResolution, scale);
 
         // Title
-        bitmapFont.draw(spriteBatch, "Fight! (press f)", inner.getCenterX() + 64, scaledResolution.getCenterY() + 64 * (height + 1) - 32);
+        bitmapFont.draw(spriteBatch, "Kampf! (drücke f um zu starten)", scaledResolution.getCenterX()+30, scaledResolution.getCenterY() + scaledResolution.getMemberHeight() - bitmapFont.getData().lineHeight);
         spriteBatch.end();
     }
 
@@ -70,5 +81,15 @@ public class FightGUI implements GUI {
         for (Texture uiTexture : uiTextures) {
             uiTexture.dispose();
         }
+    }
+
+    @Override
+    public void resize(float scale) {
+        this.oldScale = this.scale;
+        this.scale = scale;
+
+        scaledResolution.rescaleMember(oldScale, scale);
+
+        bitmapFont.getData().setScale(scale * 4);
     }
 }

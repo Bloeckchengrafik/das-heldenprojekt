@@ -96,6 +96,15 @@ public class Heldenprojekt extends ApplicationAdapter {
         assetManager.load("healer_img.png", Texture.class);
         assetManager.load("Bank.png", Texture.class);
         assetManager.load("Bank-Person.png", Texture.class);
+        assetManager.load("edgetile-0.png", Texture.class);
+        assetManager.load("edgetile-1.png", Texture.class);
+        assetManager.load("edgetile-2.png", Texture.class);
+        assetManager.load("edgetile-3.png", Texture.class);
+        assetManager.load("edgetile-4.png", Texture.class);
+        assetManager.load("edgetile-5.png", Texture.class);
+        assetManager.load("edgetile-6.png", Texture.class);
+        assetManager.load("edgetile-7.png", Texture.class);
+        assetManager.load("edgetile-8.png", Texture.class);
 
         nextGUI = new LoadingScreenGUI();
     }

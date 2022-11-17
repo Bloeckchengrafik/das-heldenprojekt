@@ -1,4 +1,4 @@
-![](doc/Screenshot-1668633071369.png)
+![](doc/Screenshot-1668681161842.png)
 
 # Das Heldenprojekt
 
@@ -7,6 +7,7 @@ Das Heldenprojekt ist ein kleines Spiel, welches ich für den Informatik-Unterri
 ## Inhalt
 - [Lokale Installation](#lokale-installation)
 - [Spielmechaniken](#spielmechaniken)
+- [Keybinds](#keybinds)
 - [Code-Struktur](#code-und-assets)
 - [Lizenz](#lizenz)
 
@@ -55,6 +56,20 @@ Nach 5s wird der nächste Held geheilt und alle anderen Helden werden um eine Po
 ### Speichern und Laden
 Das Spiel wird automatisch geschpeichert, wenn eine Aktion ausgeführt wird.
 Beim Start wird der letzte Spielstand geladen.
+
+### Screenshots
+
+Mit der Taste F2 kann ein Screenshot erstellt werden, der im Spieleordner abgelegt wird.
+
+## Keybinds
+- Bewegen des Cursors: Pfeiltasten
+- Camp setzen: Enter
+- Aktion ausführen: Leertaste
+- Kampf starten: f
+- Alle Helden auf die Wartebank setzen: e
+- Screenshot erstellen: F2
+- Spiel beenden / GUI schließen: Escape
+- Bildschirmgröße ändern: (+): u, (-) j
 
 ## Code und Assets
 Der Quellcode ist in mehrere Module aufgeteilt:

@@ -14,13 +14,15 @@ import io.bloeckchengrafik.heldenprojekt.game.Held;
 import io.bloeckchengrafik.heldenprojekt.save.SaveFile;
 import io.bloeckchengrafik.heldenprojekt.utils.ScaledResolution;
 import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
-import io.bloeckchengrafik.heldenprojekt.world.Healer;
 import io.bloeckchengrafik.heldenprojekt.world.World;
+import lombok.Getter;
 
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.zip.Deflater;
+
+import static com.badlogic.gdx.math.MathUtils.lerp;
 
 public class GameGUI implements GUI {
     private final Heldenprojekt heldenprojekt = Heldenprojekt.getInstance();
@@ -57,10 +59,20 @@ public class GameGUI implements GUI {
     private final ArrayList<Texture> rotationAroundGrassTextures = new ArrayList<>();
     private final ArrayList<Texture> rotationAroundSandTextures = new ArrayList<>();
     private final Texture[] waterTextures = new Texture[9];
+    private Texture[] edgeTextures;
     //endregion
+
+    private HealerGUI healerGUI;
 
     private SaveFile saveFile;
     private GUI backGUI;
+    @Getter
+    private float oldScale = 1;
+    @Getter
+    private float scale = 1;
+
+    private int fontLineHeight = 0;
+    private int fontSmLineHeight = 0;
 
     private int waterAnimation = 0;
     private double waterAnimationTimer = 0;
@@ -166,6 +178,18 @@ public class GameGUI implements GUI {
         waterTextures[6] = water6Texture;
         waterTextures[7] = water7Texture;
         waterTextures[8] = water8Texture;
+
+        edgeTextures = new Texture[] {
+                heldenprojekt.getAssetManager().get("edgetile-0.png"),
+                heldenprojekt.getAssetManager().get("edgetile-1.png"),
+                heldenprojekt.getAssetManager().get("edgetile-2.png"),
+                heldenprojekt.getAssetManager().get("edgetile-3.png"),
+                heldenprojekt.getAssetManager().get("edgetile-4.png"),
+                heldenprojekt.getAssetManager().get("edgetile-5.png"),
+                heldenprojekt.getAssetManager().get("edgetile-6.png"),
+                heldenprojekt.getAssetManager().get("edgetile-7.png"),
+                heldenprojekt.getAssetManager().get("edgetile-8.png")
+        };
         //endregion
 
         batch = new SpriteBatch();
@@ -179,6 +203,11 @@ public class GameGUI implements GUI {
         fontSm.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         saveFile = Heldenprojekt.getInstance().getSaveFile();
+
+        resize(saveFile.getData().getScale());
+
+        healerGUI = new HealerGUI(world.getHealer(), this);
+        healerGUI.create();
     }
 
     private boolean near(int x, int y, int tx, int ty) {
@@ -190,6 +219,17 @@ public class GameGUI implements GUI {
 
     @Override
     public void update(double delta) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
+            resize(scale + 0.1f);
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+            if (scale > 0.2f) {
+                resize(scale - 0.1f);
+            }
+        }
+
         if (backGUI != null) {
             backGUI.update(delta);
             return;
@@ -233,8 +273,7 @@ public class GameGUI implements GUI {
             int campY = saveFile.getData().getCampY();
 
             if (near(campX, campY, world.getHealer().getX(), world.getHealer().getY())) {
-                backGUI = new HealerGUI(world.getHealer(), this);
-                backGUI.create();
+                backGUI = healerGUI;
             }
 
             for (EvilCastle evilCastle : world.getEvilCastles()) {
@@ -319,7 +358,7 @@ public class GameGUI implements GUI {
                         break;
                 }
 
-                batch.draw(texture, x * 64 + scaledResolution.getCenterX(), y * 64 + scaledResolution.getCenterY(), 64, 64);
+                batch.draw(texture, x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
 
                 // Check if it has a higher-order tile next to it
                 int northTile = resolveTile(tiles, this.x + x, this.y + y + 1);
@@ -339,30 +378,63 @@ public class GameGUI implements GUI {
                     int id = tileOrdinalPair[1];
 
                     if (ordinal(tileOrder, tile) < ordinal(tileOrder, adjacentTile)) {
-                        batch.draw(getRotationAroundTextures(adjacentTile).get(id), x * 64 + scaledResolution.getCenterX(), y * 64 + scaledResolution.getCenterY(), 64, 64);
+                        batch.draw(getRotationAroundTextures(adjacentTile).get(id), x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
                     }
                 }
 
                 if (this.x + x == heldenprojekt.getSaveFile().getData().getCampX() && this.y + y == heldenprojekt.getSaveFile().getData().getCampY()) {
-                    batch.draw(campTexture, x * 64 + scaledResolution.getCenterX(), y * 64 + scaledResolution.getCenterY(), 64, 64);
+                    batch.draw(campTexture, x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
                 }
 
 
                 for (EvilCastle evilCastle : world.getEvilCastles()) {
                     if (this.x + x == evilCastle.getX() && this.y + y == evilCastle.getY()) {
-                        batch.draw(evilCastleTexture, x * 64 + scaledResolution.getCenterX(), y * 64 + scaledResolution.getCenterY(), 64, 64);
+                        batch.draw(evilCastleTexture, x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
                     }
                 }
 
                 if (this.x + x == world.getHealer().getX() && this.y + y == world.getHealer().getY()) {
-                    batch.draw(healerTexture, x * 64 + scaledResolution.getCenterX(), y * 64 + scaledResolution.getCenterY(), 64, 64);
+                    batch.draw(healerTexture, x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
                 }
+
+                boolean isUpperEdge = y == 0;
+                boolean isLowerEdge = y == 20;
+                boolean isLeftEdge = x == 0;
+                boolean isRightEdge = x == 20;
+                int edge = 4;
+                if (isUpperEdge) {
+                    edge = 7;
+                } else if (isLowerEdge) {
+                    edge = 1;
+                } else if (isLeftEdge) {
+                    edge = 3;
+                } else if (isRightEdge) {
+                    edge = 5;
+                }
+
+                if (isUpperEdge && isLeftEdge) {
+                    edge = 6;
+                }
+
+                if (isUpperEdge && isRightEdge) {
+                    edge = 8;
+                }
+
+                if (isLowerEdge && isLeftEdge) {
+                    edge = 0;
+                }
+
+                if (isLowerEdge && isRightEdge) {
+                    edge = 2;
+                }
+
+                batch.draw(edgeTextures[edge], x * 64 * scale + scaledResolution.getCenterX(), y * 64 * scale + scaledResolution.getCenterY(), 64 * scale, 64 * scale);
             }
         }
 
         // Draw cursor at center (Cursor is 9x9 tiles)
         int x = 10, y = 10;
-        batch.draw(cursorTexture, x * 64 + scaledResolution.getCenterX() - 64, y * 64 + scaledResolution.getCenterY() - 64, 64 * 3, 64 * 3);
+        batch.draw(cursorTexture, x * 64 * scale + scaledResolution.getCenterX() - 64 * scale, y * 64 * scale + scaledResolution.getCenterY() - 64 * scale, 64 * scale * 3, 64 * scale * 3);
 
         int tile = resolveTile(tiles, this.x + x, this.y + y);
 
@@ -385,32 +457,33 @@ public class GameGUI implements GUI {
         }
 
         if (this.y > 22) {
-            drawString("Feindliches Gebiet", 0, -80);
+            drawString("Feindliches Gebiet", 0, -10-fontLineHeight);
         } else {
-            drawString("eigenes Gebiet", 0, -80);
+            drawString("eigenes Gebiet", 0, -10-fontLineHeight);
         }
 
-        drawString("Koordinaten: " + this.curX + ", " + this.curY, 0, -80 - 70);
+        drawString("Koordinaten: " + this.curX + ", " + this.curY, 0, -10-(fontLineHeight*2));
 
-        int sidebarX = 21 * 64 + 10;
-        int sidebarY = 21 * 64;
-        int lineSpace = 0;
+        int sidebarX = (int) (21 * 64 * scale + 10);
+        int sidebarY = (int) (21 * 64 * scale);
+        int lineSpace = -fontSmLineHeight;
 
         for (Entity entity : saveFile.getData().getHeldengruppe().getEntities()) {
             Held held = (Held) entity;
             drawString(held.getName(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight;
             drawString("HP: " + held.getLebenspunkte(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight;
             drawString("SP: " + held.getStaerke(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight;
             drawString("AW: " + held.getAngriffswert(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight;
             drawString("Waffe: " + held.getWaffe().getName(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight;
+            drawString("Material: " + held.getWaffe().getMaterial().getName(), sidebarX, sidebarY + lineSpace, fontSm);
+            lineSpace -= fontSmLineHeight;
             drawString("WB: " + held.getWaffe().getBonus(), sidebarX, sidebarY + lineSpace, fontSm);
-            lineSpace -= 45;
-            lineSpace -= 45;
+            lineSpace -= fontSmLineHeight*2;
         }
 
 
@@ -479,5 +552,29 @@ public class GameGUI implements GUI {
         for (Texture tex : waterTextures) {
             tex.dispose();
         }
+        for (Texture tex : edgeTextures) {
+            tex.dispose();
+        }
+    }
+
+    @Override
+    public void resize(float scale) {
+        oldScale = this.scale;
+        this.scale = scale;
+
+        scaledResolution.rescaleMember(oldScale, scale);
+
+        font.getData().setScale(scale*3f);
+        fontSm.getData().setScale(scale*2f);
+
+        fontLineHeight = (int) (font.getLineHeight() + 5);
+        fontSmLineHeight = (int) (fontSm.getLineHeight() + 5);
+
+        if (healerGUI != null) {
+            healerGUI.resize(scale);
+        }
+
+        saveFile.getData().setScale(scale);
+        saveFile.save();
     }
 }

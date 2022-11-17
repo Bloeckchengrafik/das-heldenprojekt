@@ -9,8 +9,9 @@ public interface GUI {
     void update(double delta);
     void render();
     void dispose();
+    void resize(float scale);
 
-    static void renderImageBackground(int width, int height, Texture[] uiTextures, SpriteBatch spriteBatch, ScaledResolution scaledResolution) {
+    static void renderImageBackground(int width, int height, Texture[] uiTextures, SpriteBatch spriteBatch, ScaledResolution scaledResolution, float scale) {
         int toRender = 0;
 
         // UI
@@ -46,7 +47,7 @@ public interface GUI {
                     toRender = 8;
                 }
 
-                spriteBatch.draw(uiTextures[toRender], scaledResolution.getCenterX() + row * 64, scaledResolution.getCenterY() + col * 64, 64, 64);
+                spriteBatch.draw(uiTextures[toRender], scaledResolution.getCenterX() + row * 64*scale, scaledResolution.getCenterY() + col * 64*scale, 64*scale, 64*scale);
             }
         }
     }

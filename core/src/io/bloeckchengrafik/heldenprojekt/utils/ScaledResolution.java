@@ -21,6 +21,11 @@ public class ScaledResolution {
         this.height = Gdx.graphics.getHeight();
     }
 
+    public void rescaleMember(float prevScale, float newScale) {
+        this.memberWidth = (int) (this.memberWidth * (newScale / prevScale));
+        this.memberHeight = (int) (this.memberHeight * (newScale / prevScale));
+    }
+
     public int getWidth() {
         return width;
     }

@@ -27,6 +27,8 @@ public class HealerGUI implements GUI {
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
     private double timer = 5;
+    private float scale = 1;
+    private float oldScale = 1;
 
     public HealerGUI(Healer healer, GameGUI gameGUI) {
         this.healer = healer;
@@ -34,6 +36,9 @@ public class HealerGUI implements GUI {
 
         inner.setContainer(scaledResolution);
         bitmapFont.getData().scale(2);
+        bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        resize(gameGUI.getScale());
     }
 
     @Override
@@ -53,6 +58,8 @@ public class HealerGUI implements GUI {
         healerImgTexture = Heldenprojekt.getInstance().getAssetManager().get("healer_img.png");
         bankTexture = Heldenprojekt.getInstance().getAssetManager().get("Bank.png");
         bankPersonTexture = Heldenprojekt.getInstance().getAssetManager().get("Bank-Person.png");
+
+        resize(gameGUI.getScale());
     }
 
     @Override
@@ -87,21 +94,21 @@ public class HealerGUI implements GUI {
     @Override
     public void render() {
         spriteBatch.begin();
-        GUI.renderImageBackground(width, height, uiTextures, spriteBatch, scaledResolution);
+        GUI.renderImageBackground(width, height, uiTextures, spriteBatch, scaledResolution, scale);
 
 
         // Title
-        bitmapFont.draw(spriteBatch, "Healer (e to enqueue all)", inner.getCenterX() + 64, scaledResolution.getCenterY() + 64 * (height + 1) - 32);
+        bitmapFont.draw(spriteBatch, "Heiler (Drücke e um alle auf die Wartebank zu setzen)", scaledResolution.getCenterX()+30, scaledResolution.getCenterY() + scaledResolution.getMemberHeight() - bitmapFont.getData().lineHeight);
 
-        spriteBatch.draw(healerImgTexture, scaledResolution.getCenterX()-300, scaledResolution.getCenterY(), 1000, 550);
+        spriteBatch.draw(healerImgTexture, scaledResolution.getCenterX()-300*scale, scaledResolution.getCenterY(), 1000*scale, 550*scale);
 
-        spriteBatch.draw(bankTexture, scaledResolution.getCenterX()+300, scaledResolution.getCenterY(), 1000, 550);
+        spriteBatch.draw(bankTexture, scaledResolution.getCenterX()+300*scale, scaledResolution.getCenterY(), 1000*scale, 550*scale);
 
         int offset = 0;
 
         for (int i = 0; i < healer.getNum(); i++) {
-            spriteBatch.draw(bankPersonTexture, scaledResolution.getCenterX()+400+offset, scaledResolution.getCenterY()+30, 800, 450);
-            offset+=200;
+            spriteBatch.draw(bankPersonTexture, scaledResolution.getCenterX()+400*scale+offset, scaledResolution.getCenterY()+30*scale, 800*scale, 450*scale);
+            offset+=200*scale;
         }
 
         spriteBatch.end();
@@ -109,7 +116,7 @@ public class HealerGUI implements GUI {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         shapeRenderer.setColor( 0, 0.8f, 0, (float) Math.sin((float) timer)/2);
-        shapeRenderer.circle(scaledResolution.getCenterX()+300, scaledResolution.getCenterY()+200, (float) Math.sin((float) timer) + 30);
+        shapeRenderer.circle(scaledResolution.getCenterX()+300*scale, scaledResolution.getCenterY()+200*scale, ((float) Math.sin((float) timer) + 30)*scale);
 
         shapeRenderer.end();
     }
@@ -122,5 +129,15 @@ public class HealerGUI implements GUI {
         for (Texture uiTexture : uiTextures) {
             uiTexture.dispose();
         }
+    }
+
+    @Override
+    public void resize(float scale) {
+        this.oldScale = this.scale;
+        this.scale = scale;
+
+        scaledResolution.rescaleMember(oldScale, scale);
+
+        bitmapFont.getData().setScale(scale * 3);
     }
 }

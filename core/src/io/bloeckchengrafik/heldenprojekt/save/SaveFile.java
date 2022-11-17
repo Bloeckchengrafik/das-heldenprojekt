@@ -68,5 +68,6 @@ public class SaveFile {
         private int campX = 0;
         private int campY = 0;
         private Gruppe heldengruppe = new GruppenBuilder(4).fuelleMitHelden().build();
+        private float scale = 1.0f;
     }
 }
