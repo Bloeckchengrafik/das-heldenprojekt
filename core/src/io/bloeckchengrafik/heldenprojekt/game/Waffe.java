@@ -18,9 +18,9 @@ public class Waffe implements Serializable {
             "Fridolin die Flöte",
             "Olaf der Schneemann",
             "Mithrilbasti",
-            "Hr. Braumann",
             "Hr. Basti",
-            "DER Bannhammer"
+            "DER Bannhammer",
+            "DER ONKEL"
     };
 
 
