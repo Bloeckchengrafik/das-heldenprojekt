@@ -1,7 +1,6 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
 import java.util.logging.Logger;
-import java.util.Random;
 
 /**
  *
@@ -23,37 +22,21 @@ public class Kampfregel {
   public void kampf(Entity entity1, Entity entity2) {
     int e1Schaden = entity1.getAngriffswert();
     int e2Schaden = entity2.getAngriffswert();
+
+    System.out.println("Cmp " + entity1.getAngriffswert() + " vs " + entity2.getAngriffswert());
     
     if (e1Schaden >= e2Schaden) {
-      entity1.setLebenspunkte( Math.max(entity1.getLebenspunkte() - 1, 0) );    
+      entity2.setLebenspunkte( Math.max(entity2.getLebenspunkte() - 1, 0) );
     } else {
       entity1.setLebenspunkte( Math.max(entity1.getLebenspunkte() - 1, 0) );
     }
   }
-  
-  private Entity[] randomize(Entity[] rndm) {
-    Random random = new Random();
-    
-    for (int i = 0; i < rndm.length; ++i) {
-      int index = random.nextInt(rndm.length - i);
-      Entity tmp = rndm[rndm.length - 1 - i];
-      rndm[rndm.length - 1 - i] = rndm[index];
-      rndm[index] = tmp;
-    }
-    
-    return rndm;
-  }
-  
-  
-  public void gruppenKampf(Gruppe gruppe1, Gruppe gruppe2) {
-    Entity[] gr1 = randomize(gruppe1.getEntities());
-    Entity[] gr2 = randomize(gruppe2.getEntities());
-    
-    for (Entity e1 : gr1) {
-      for (Entity e2 : gr2) {
-        kampf(e1, e2);  
-      } // end of for  
-    } // end of for
+
+  public void gruppenKampfSchritt(Gruppe gruppe1, Gruppe gruppe2) {
+    Entity[] gr1 = gruppe1.getEntities();
+    Entity[] gr2 = gruppe2.getEntities();
+
+    kampf(gr1[new Wuerfel(gr1.length).wuerfeln()-1], gr2[new Wuerfel(gr2.length).wuerfeln()-1]);
   }
   
   // Ende Methoden

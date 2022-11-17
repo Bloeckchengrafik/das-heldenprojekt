@@ -78,5 +78,7 @@ public class Held extends Entity {
       return new Zauberer(Zauberer.names[(new Random().nextInt(Zauberer.names.length))], staerke, lebenspunkte, waffe, other); 
     } // end of if-else
   }
+
+  public void postAngriff() {}
   // Ende Methoden
 } // end of Held

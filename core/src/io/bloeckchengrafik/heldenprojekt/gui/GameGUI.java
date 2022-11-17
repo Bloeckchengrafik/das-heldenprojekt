@@ -64,6 +64,7 @@ public class GameGUI implements GUI {
     //endregion
 
     private HealerGUI healerGUI;
+    private FightGUI fightGUI;
 
     private SaveFile saveFile;
     private GUI backGUI;
@@ -290,6 +291,7 @@ public class GameGUI implements GUI {
                 if (near(campX, campY, evilCastle.getX(), evilCastle.getY())) {
                     backGUI = new FightGUI(this, evilCastle);
                     backGUI.create();
+                    fightGUI = (FightGUI) backGUI;
                     break;
                 }
             }
@@ -606,6 +608,10 @@ public class GameGUI implements GUI {
             healerGUI.resize(scale);
         }
 
+        if (backGUI != null) {
+            backGUI.resize(scale);
+        }
+
         saveFile.getData().setScale(scale);
         saveFile.save();
     }
@@ -618,7 +624,18 @@ public class GameGUI implements GUI {
         return this.scale;
     }
 
+    public BitmapFont getFontSm() {
+        return this.fontSm;
+    }
+    public int getFontSmLineHeight() {
+        return this.fontSmLineHeight;
+    }
+
     public MusicBox getMusicBox() {
         return musicBox;
+    }
+
+    public CenteredResolution getCenteredResolution() {
+        return this.scaledResolution;
     }
 }

@@ -23,13 +23,13 @@ public class Troll extends Monster {
   }
   
   public int getAngriffswert() {
-    int generated = super.getAngriffswert();
-    
+    return super.getAngriffswert();
+  }
+
+  public void postAngriff() {
     if (wuerfel.wuerfeln() == 1) {
-       setLebenspunkte(getLebenspunkte()+1);
+      setLebenspunkte(getLebenspunkte()+1);
     }
-    
-    return generated;
   }
 
   // Ende Methoden

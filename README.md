@@ -21,7 +21,7 @@ Mac OS X gleich.
 
 1. Repository klonen oder herunterladen
 2. In das Verzeichnis wechseln
-3. `./gradlew run` ausführen
+3. `./gradlew desktop:run` ausführen
 4. Spielen
 
 Ist der [Java-Editor](https://javaeditor.org/doku.php) erwünscht, kann auch mittels `./gradlew jar` eine

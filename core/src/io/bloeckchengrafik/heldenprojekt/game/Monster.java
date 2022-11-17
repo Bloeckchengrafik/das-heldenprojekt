@@ -12,6 +12,7 @@ public class Monster extends Entity{
   
   // Anfang Attribute
   private Wuerfel wuerfel4 = new Wuerfel(4);
+  private int bonus;
   // Ende Attribute
   
   public Monster(int staerke, int lebenspunkte) {
@@ -20,18 +21,19 @@ public class Monster extends Entity{
   
   public Monster() {
     super(new Wuerfel(4).wuerfeln(), new Wuerfel(4).wuerfeln()+10);
+    bonus = wuerfel4.wuerfeln();
   }
 
   // Anfang Methoden
   public int getAngriffswert() {
     angriffswertBerechnen();
-    return angriffswert + wuerfel4.wuerfeln();
+    return angriffswert + bonus;
   }
   
   public static Monster newRandom() {
-    Wuerfel wuerfel7 = new Wuerfel(7);
-    int staerke = wuerfel7.wuerfeln();
-    int lebenspunkte = wuerfel7.wuerfeln();
+    Wuerfel wuerfel15 = new Wuerfel(15);
+    int staerke = wuerfel15.wuerfeln();
+    int lebenspunkte = wuerfel15.wuerfeln();
     
     switch (new Wuerfel(3).wuerfeln()) {
       case 1: 
@@ -45,5 +47,9 @@ public class Monster extends Entity{
     } // end of switch
   }
 
-  // Ende Methoden
+  public String getName() {
+    return getClass().getSimpleName();
+  }
+
+    // Ende Methoden
 } // end of Monster
