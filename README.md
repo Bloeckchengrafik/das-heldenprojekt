@@ -11,6 +11,7 @@ hier auf der Umsetzung, nicht primär auf Grafik und Spielspaß.
 - [Spielmechaniken](#spielmechaniken)
 - [Keybinds](#keybinds)
 - [Code-Struktur](#code-und-assets)
+- [Musik](#musik)
 - [Lizenz](#lizenz)
 
 ## Lokale Installation
@@ -190,6 +191,17 @@ des Spiels lange warten muss. Der angezeigte Ladebalken zeigt dies an.
 Im `GameGUI` werden mehrere Instanzen der `CenteredResolution`-Klasse verwendet, um die Auflösung des Bildschirms beim
 Berechnen der Positionen der GUI-Elemente zu skalieren. Dies ist nötig, damit das Spiel auf allen Bildschirmen gleich
 aussieht. Weiterhin wird hier die Zentrierung der GUI-Elemente berechnet.
+
+## Musik
+Um die Musik des Spieles nutzen zu können, müssen die 4 Musikdateien vor dem Kompilieren in den `assets-Order` abgelegt werden. Diese Dateien
+heißen `musicSanKen.mp3`, `musicOldStories.mp3`, `musicComeToMyWorld.mp3` und `musicNewWorld.mp3`. 
+- `musicSanKen.mp3` ist die erste Kampfmusik, sie ist in der Entwicklerausgabe `SAN-KEN「The Three SAGES」` von Kevin Penkin
+- `musicOldStories.mp3` ist eine normale Hintergrundmusik, sie ist in der Entwicklerausgabe `Old Stories` von Kevin Penkin
+- `musicComeToMyWorld.mp3` ist auch eine normale Hintergrundmusik, sie ist in der Entwicklerausgabe `Come to my World` von Kevin Penkin
+- `musicNewWorld.mp3` ist die zweite Kampfmusik, sie ist in der Entwicklerausgabe `New World` von Kevin Penkin
+
+Die Musik ist hier nicht enthalten, da ich nicht die nötigen Rechte habe, diese zu veröffentlichen. Die Musik ist aber
+bei YouTube verfügbar. In der abgegebenen Variante des Spiels ist die Musik enthalten.
 
 ## Lizenz
 

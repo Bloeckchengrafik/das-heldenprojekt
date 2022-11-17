@@ -6,29 +6,29 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
+import io.bloeckchengrafik.heldenprojekt.PlatformProvider;
 import io.bloeckchengrafik.heldenprojekt.gui.GUI;
+import io.bloeckchengrafik.heldenprojekt.gui.GameGUI;
 import io.bloeckchengrafik.heldenprojekt.gui.LoadingScreenGUI;
 import io.bloeckchengrafik.heldenprojekt.save.SaveFile;
 import io.bloeckchengrafik.heldenprojekt.world.World;
 import io.bloeckchengrafik.heldenprojekt.world.WorldLoader;
-import lombok.Getter;
-import lombok.Setter;
 
 public class Heldenprojekt extends ApplicationAdapter {
-    @Getter
     private static Heldenprojekt instance;
-    @Getter
     private AssetManager assetManager;
-    @Getter
     private SaveFile saveFile = new SaveFile();
     private GUI currentGUI;
-    @Setter
     private GUI nextGUI;
-    @Getter
+    private GameGUI ingameGUI;
     private PlatformProvider platform;
 
     public Heldenprojekt(PlatformProvider platform) {
         this.platform = platform;
+    }
+
+    public static Heldenprojekt getInstance() {
+        return Heldenprojekt.instance;
     }
 
 
@@ -120,6 +120,12 @@ public class Heldenprojekt extends ApplicationAdapter {
     public void render() {
         ScreenUtils.clear(0, 0, 0, 1f);
 
+        if (ingameGUI != null) {
+            currentGUI.update(Gdx.graphics.getDeltaTime());
+            currentGUI.render();
+            return;
+        }
+
         if (nextGUI != null) {
             if (currentGUI != null) {
                 currentGUI.dispose();
@@ -139,5 +145,26 @@ public class Heldenprojekt extends ApplicationAdapter {
         if (currentGUI != null) {
             currentGUI.dispose();
         }
+    }
+
+    public AssetManager getAssetManager() {
+        return this.assetManager;
+    }
+
+    public SaveFile getSaveFile() {
+        return this.saveFile;
+    }
+
+    public PlatformProvider getPlatform() {
+        return this.platform;
+    }
+
+    public void setNextGUI(GUI nextGUI) {
+        this.nextGUI = nextGUI;
+    }
+
+    public void gotoGameGUI() {
+        this.ingameGUI = new GameGUI();
+        this.ingameGUI.create();
     }
 }

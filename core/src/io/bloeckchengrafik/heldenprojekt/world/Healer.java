@@ -3,13 +3,10 @@ package io.bloeckchengrafik.heldenprojekt.world;
 import io.bloeckchengrafik.heldenprojekt.game.Held;
 import io.bloeckchengrafik.heldenprojekt.game.Queue;
 import io.bloeckchengrafik.heldenprojekt.game.Wuerfel;
-import lombok.Getter;
 
 public class Healer {
     private final Queue queue = new Queue();
-    @Getter
     private final int x,y;
-    @Getter
     private int num = 0;
 
     public Healer(int x, int y) {
@@ -26,5 +23,17 @@ public class Healer {
         Held held = (Held) queue.dequeue();
         held.setLebenspunkte(held.getLebenspunkte()+new Wuerfel(3).wuerfeln());
         num--;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public int getNum() {
+        return this.num;
     }
 }

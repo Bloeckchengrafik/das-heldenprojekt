@@ -1,11 +1,9 @@
 package io.bloeckchengrafik.heldenprojekt.world;
 
-import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.util.ArrayList;
 
-@Getter
 public class World {
     private final int width;
     private final int height;
@@ -13,7 +11,6 @@ public class World {
     private final ArrayList<EvilCastle> evilCastles = new ArrayList<>();
     private final Healer healer;
 
-    @SneakyThrows
     public World(String file) {
         // Read file
 
@@ -70,4 +67,23 @@ public class World {
         }
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int[][] getTiles() {
+        return this.tiles;
+    }
+
+    public ArrayList<EvilCastle> getEvilCastles() {
+        return this.evilCastles;
+    }
+
+    public Healer getHealer() {
+        return this.healer;
+    }
 }

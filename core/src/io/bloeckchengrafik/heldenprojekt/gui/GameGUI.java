@@ -14,9 +14,9 @@ import io.bloeckchengrafik.heldenprojekt.game.Entity;
 import io.bloeckchengrafik.heldenprojekt.game.Held;
 import io.bloeckchengrafik.heldenprojekt.save.SaveFile;
 import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.MusicBox;
 import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 import io.bloeckchengrafik.heldenprojekt.world.World;
-import lombok.Getter;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -67,9 +67,7 @@ public class GameGUI implements GUI {
 
     private SaveFile saveFile;
     private GUI backGUI;
-    @Getter
     private float oldScale = 1;
-    @Getter
     private float scale = 1;
     private double flash = 0;
 
@@ -78,6 +76,8 @@ public class GameGUI implements GUI {
 
     private int waterAnimation = 0;
     private double waterAnimationTimer = 0;
+
+    private MusicBox musicBox;
 
     @Override
     public void create() {
@@ -213,6 +213,10 @@ public class GameGUI implements GUI {
 
         shapeRenderer = new ShapeRenderer();
         shapeBatch = new SpriteBatch();
+
+        musicBox = new MusicBox();
+        musicBox.create();
+        musicBox.useTrack(MusicBox.Track.MAIN_THEME);
     }
 
     private boolean near(int x, int y, int tx, int ty) {
@@ -224,6 +228,7 @@ public class GameGUI implements GUI {
 
     @Override
     public void update(double delta) {
+        musicBox.update();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
             resize(scale + 0.1f);
@@ -603,5 +608,17 @@ public class GameGUI implements GUI {
 
         saveFile.getData().setScale(scale);
         saveFile.save();
+    }
+
+    public float getOldScale() {
+        return this.oldScale;
+    }
+
+    public float getScale() {
+        return this.scale;
+    }
+
+    public MusicBox getMusicBox() {
+        return musicBox;
     }
 }

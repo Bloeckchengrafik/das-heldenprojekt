@@ -25,6 +25,9 @@ gradle-app.setting
 .DS_Store
 Thumbs.db
 
+music/
+*.mp3
+
 /ios/xcode/*.xcodeproj/*
 !/ios/xcode/*.xcodeproj/xcshareddata
 !/ios/xcode/*.xcodeproj/project.pbxproj

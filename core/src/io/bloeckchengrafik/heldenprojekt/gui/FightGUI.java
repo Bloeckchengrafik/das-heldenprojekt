@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
 import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
+import io.bloeckchengrafik.heldenprojekt.utils.MusicBox;
 import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 
 public class FightGUI implements GUI {
@@ -49,12 +50,15 @@ public class FightGUI implements GUI {
         bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         resize(gameGUI.getScale());
+
+        gameGUI.getMusicBox().useTrack(MusicBox.Track.BATTLE_THEME);
     }
 
     @Override
     public void update(double delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             gameGUI.returnToFront();
+            gameGUI.getMusicBox().useTrack(MusicBox.Track.MAIN_THEME);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
