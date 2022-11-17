@@ -24,6 +24,12 @@ public class Heldenprojekt extends ApplicationAdapter {
     private GUI currentGUI;
     @Setter
     private GUI nextGUI;
+    @Getter
+    private PlatformProvider platform;
+
+    public Heldenprojekt(PlatformProvider platform) {
+        this.platform = platform;
+    }
 
 
     @Override

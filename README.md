@@ -72,6 +72,9 @@ Mit der Taste F2 kann ein Screenshot erstellt werden, der im Spieleordner abgele
 - Bildschirmgröße ändern: (+): u, (-) j
 
 ## Code und Assets
+Aktuell wird nur eine Platform unterstützt, der Code ist aber darauf ausgelegt, mehrere Platformen zu unterstützen.
+Denkbar wäre z.B. eine Android, iOS oder Web-Version.
+
 Der Quellcode ist in mehrere Module aufgeteilt:
 - `core` ist das Hauptmodul, welches die Spielmechaniken implementiert. Hier ist kein platformabhängiger Code enthalten.
 - `desktop` ist das Desktop-Modul, welches die Spielmechaniken auf die Desktop-Plattform anwendet. Hier ist der platformabhängige Code enthalten.
@@ -80,7 +83,7 @@ Der Quellcode ist in mehrere Module aufgeteilt:
 
 Die Mainklasse heißt im core-Modul `io.bloeckchengrafik.heldenprojekt.Heldenprojekt`.
 
-Nachfolgende Absätze beschreiben die Code-Struktur im Detail, bezogen auf das `core`-Modul, da hier die Hauptlogik implementiert ist.
+Nachfolgende Absätze beschreiben die Code-Struktur im Detail, weitgehend bezogen auf das `core`-Modul, da hier die Hauptlogik implementiert ist.
 
 ### Spielgeschehen
 Das Spielgeschehen ist im Package `io.bloeckchengrafik.heldenprojekt.game` implementiert. Hier sind vor allem die Klassen für Kämpfe, Monster und Held implementiert.
@@ -109,6 +112,13 @@ Die Klasse `World` ist die Welt, in der sich die Helden bewegen und die Kämpfe 
 Der `WorldLoader` macht die Welt als libGDX-Asset-Datei verwendbar, damit sie während dem Laden des Spiels geladen werden kann.
 Das `EvilCastle` ist die Burg, in der die Helden kämpfen können und die Monster wohnen.
 Der `Healer` ist der Heiler, der die Helden heilen kann.
+
+### Platformspezifischer Code
+Für alle Platformen ist ein `PlatformProvider` implementiert, der die Platform-Abhängigkeiten abstrahiert. Dieser PlatformProvider wird in der Launcher-Klasse der Mainklasse mitgegeben.
+Die `DesktopPlatform` ist der Provider für die Desktop-Plattform. Hier werden z.B. direkte Aufrufe zu OpenGL gemacht, um Spezialfunktionen zu nutzen.
+Um diese Funktionalität auf anderen Plattformen zu nutzen, muss ein eigener Provider implementiert werden.
+
+Weiterer Platformspezifischer Code wird über libGDX verwaltet. libGDX ist eine Java-Bibliothek, die die Entwicklung von Spielen auf verschiedenen Plattformen vereinfacht.
 
 ## Lizenz
 Das Spiel ist unter der MIT-Lizenz veröffentlicht.

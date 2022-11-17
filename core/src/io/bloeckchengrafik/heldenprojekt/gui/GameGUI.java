@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
 import io.bloeckchengrafik.heldenprojekt.game.Entity;
 import io.bloeckchengrafik.heldenprojekt.game.Held;
@@ -39,6 +40,8 @@ public class GameGUI implements GUI {
     private final int[] tileOrder = new int[]{TILE_WATER, TILE_SAND, TILE_GRASS, TILE_FOREST, TILE_MOUNTAIN};
     private final int[] campBlockedTiles = new int[]{TILE_WATER, TILE_MOUNTAIN};
     private SpriteBatch batch;
+    private SpriteBatch shapeBatch;
+    private ShapeRenderer shapeRenderer;
     private World world;
     private int x = 35,
             y = 13;
@@ -70,6 +73,7 @@ public class GameGUI implements GUI {
     private float oldScale = 1;
     @Getter
     private float scale = 1;
+    private double flash = 0;
 
     private int fontLineHeight = 0;
     private int fontSmLineHeight = 0;
@@ -208,6 +212,9 @@ public class GameGUI implements GUI {
 
         healerGUI = new HealerGUI(world.getHealer(), this);
         healerGUI.create();
+
+        shapeRenderer = new ShapeRenderer();
+        shapeBatch = new SpriteBatch();
     }
 
     private boolean near(int x, int y, int tx, int ty) {
@@ -486,7 +493,6 @@ public class GameGUI implements GUI {
             lineSpace -= fontSmLineHeight*2;
         }
 
-
         batch.end();
 
         if (backGUI != null) {
@@ -504,8 +510,28 @@ public class GameGUI implements GUI {
 
             PixmapIO.writePNG(Gdx.files.absolute(Heldenprojekt.getInstance().getSaveFile().getDataDir() + File.separatorChar + "Screenshot-" + System.currentTimeMillis() + ".png"), pixmap, Deflater.DEFAULT_COMPRESSION, true);
             pixmap.dispose();
+
+            flash = 0.5f;
         }
-    }
+
+        if (flash > 0) {
+            flash -= Gdx.graphics.getDeltaTime();
+
+            Heldenprojekt.getInstance().getPlatform().enableBlend();
+            shapeBatch.begin();
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(1f, 1f, 1f, 0.1f);
+            shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            shapeRenderer.end();
+            shapeBatch.end();
+            Heldenprojekt.getInstance().getPlatform().disableBlend();
+
+
+            if (flash < 0) {
+                flash = 0;
+            }
+        }
+}
 
     public void returnToFront() {
         backGUI = null;
@@ -555,6 +581,9 @@ public class GameGUI implements GUI {
         for (Texture tex : edgeTextures) {
             tex.dispose();
         }
+
+        shapeRenderer.dispose();
+        shapeBatch.dispose();
     }
 
     @Override
