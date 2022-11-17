@@ -1,7 +1,5 @@
 package io.bloeckchengrafik.heldenprojekt.world;
 
-import lombok.SneakyThrows;
-
 import java.util.ArrayList;
 
 public class World {
@@ -65,14 +63,6 @@ public class World {
             default:
                 return 0;
         }
-    }
-
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
     }
 
     public int[][] getTiles() {

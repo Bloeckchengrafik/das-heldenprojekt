@@ -1,7 +1,5 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
-import java.util.logging.Logger;
-
 /**
  * Beschreibung
  *
@@ -12,7 +10,7 @@ import java.util.logging.Logger;
 public class Krieger extends Held {
 
     // Anfang Attribute
-    private int ausdauer;
+    private final int ausdauer;
 
     public static final String[] names = {
             "Gerald",
@@ -34,10 +32,6 @@ public class Krieger extends Held {
     public void angriffswertBerechnen() {
         super.angriffswertBerechnen();
         this.angriffswert *= 1F + (ausdauer / 100F);
-    }
-
-    public int getAusdauer() {
-        return ausdauer;
     }
 
     // Ende Methoden

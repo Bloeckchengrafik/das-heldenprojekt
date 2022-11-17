@@ -3,7 +3,6 @@ package io.bloeckchengrafik.heldenprojekt.save;
 import io.bloeckchengrafik.heldenprojekt.game.Gruppe;
 import io.bloeckchengrafik.heldenprojekt.game.GruppenBuilder;
 import io.bloeckchengrafik.heldenprojekt.utils.BinaryUtils;
-import lombok.SneakyThrows;
 import net.harawata.appdirs.AppDirsFactory;
 
 import java.io.*;
@@ -11,7 +10,7 @@ import java.io.*;
 public class SaveFile {
     private final File saveFile;
     private final String dataDir;
-    private SaveData data;
+    private final SaveData data;
 
     public SaveFile() throws RuntimeException {
         dataDir = AppDirsFactory.getInstance()
@@ -84,10 +83,6 @@ public class SaveFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public File getSaveFile() {
-        return this.saveFile;
     }
 
     public String getDataDir() {

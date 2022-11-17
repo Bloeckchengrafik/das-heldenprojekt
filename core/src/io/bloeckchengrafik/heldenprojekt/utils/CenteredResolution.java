@@ -3,14 +3,14 @@ package io.bloeckchengrafik.heldenprojekt.utils;
 import com.badlogic.gdx.Gdx;
 
 public class CenteredResolution {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private CenteredResolution container;
 
     private int memberWidth;
     private int memberHeight;
 
-    private int memberOffsetX = 0;
+    private final int memberOffsetX = 0;
     private int memberOffsetY = 0;
 
     public CenteredResolution(int memberWidth, int memberHeight) {
@@ -24,14 +24,6 @@ public class CenteredResolution {
     public void rescaleMember(float prevScale, float newScale) {
         this.memberWidth = (int) (this.memberWidth * (newScale / prevScale));
         this.memberHeight = (int) (this.memberHeight * (newScale / prevScale));
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public int getCenterX() {
@@ -53,42 +45,12 @@ public class CenteredResolution {
         return (height / 2 - memberHeight / 2) + memberOffsetY + containerCenterX;
     }
 
-    public CenteredResolution getContainer() {
-        return this.container;
-    }
-
     public int getMemberWidth() {
         return this.memberWidth;
     }
 
     public int getMemberHeight() {
         return this.memberHeight;
-    }
-
-    public int getMemberOffsetX() {
-        return this.memberOffsetX;
-    }
-
-    public int getMemberOffsetY() {
-        return this.memberOffsetY;
-    }
-
-    public void setContainer(CenteredResolution container) {
-        width = container.getMemberWidth();
-        height = container.getMemberHeight();
-        this.container = container;
-    }
-
-    public void setMemberWidth(int memberWidth) {
-        this.memberWidth = memberWidth;
-    }
-
-    public void setMemberHeight(int memberHeight) {
-        this.memberHeight = memberHeight;
-    }
-
-    public void setMemberOffsetX(int memberOffsetX) {
-        this.memberOffsetX = memberOffsetX;
     }
 
     public void setMemberOffsetY(int memberOffsetY) {

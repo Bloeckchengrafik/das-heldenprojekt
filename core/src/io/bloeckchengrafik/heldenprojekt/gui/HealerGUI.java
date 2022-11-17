@@ -22,19 +22,16 @@ public class HealerGUI implements GUI {
     private Texture bankPersonTexture;
     private final BitmapFont bitmapFont = new BitmapFont();
     private final CenteredResolution scaledResolution = new CenteredResolution((width + 2) * 64, (height + 2) * 64);
-    private final CenteredResolution inner = new CenteredResolution(0,0);
     private final SpriteBatch spriteBatch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
     private double timer = 5;
     private float scale = 1;
-    private float oldScale = 1;
 
     public HealerGUI(Healer healer, GameGUI gameGUI) {
         this.healer = healer;
         this.gameGUI = gameGUI;
 
-        inner.setContainer(scaledResolution);
         bitmapFont.getData().scale(2);
         bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -133,7 +130,7 @@ public class HealerGUI implements GUI {
 
     @Override
     public void resize(float scale) {
-        this.oldScale = this.scale;
+        float oldScale = this.scale;
         this.scale = scale;
 
         scaledResolution.rescaleMember(oldScale, scale);

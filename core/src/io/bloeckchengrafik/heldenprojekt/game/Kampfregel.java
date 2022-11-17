@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 public class Kampfregel {
   
   // Anfang Attribute
-  private static Logger logger = LogFormat.getLogger(Kampfregel.class);
-  private Wuerfel wuerfel6 = new Wuerfel(6);
-  private Wuerfel wuerfel10 = new Wuerfel(10);
+  private static final Logger logger = LogFormat.getLogger(Kampfregel.class);
+  private final Wuerfel wuerfel6 = new Wuerfel(6);
+  private final Wuerfel wuerfel10 = new Wuerfel(10);
   // Ende Attribute
   
   // Anfang Methoden

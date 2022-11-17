@@ -18,11 +18,11 @@ public class Entity implements Serializable {
   protected int angriffswert;
   private int lebenspunkte;
   private float level = 1;
-  private Wuerfel wuerfel100 = new Wuerfel(100);
+  private final Wuerfel wuerfel100 = new Wuerfel(100);
   private ArrayList<Seelenscherbe> seelenscherben = new ArrayList<>();
   
   
-  private static Logger logger = LogFormat.getLogger(Entity.class);
+  private static final Logger logger = LogFormat.getLogger(Entity.class);
   // Ende Attribute
   
   public Entity(int staerke, int lebenspunkte) {

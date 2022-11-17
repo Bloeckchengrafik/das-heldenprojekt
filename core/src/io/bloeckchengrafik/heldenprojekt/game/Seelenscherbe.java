@@ -9,19 +9,17 @@ package io.bloeckchengrafik.heldenprojekt.game;
  */
 
 public class Seelenscherbe {
-  
-  // Anfang Attribute
-  private int ksch = 0;
-  private int kper = 0;
+
   // Ende Attribute
   
   // Anfang Methoden
   public int getKritischerSchaden(){
-    return ksch;
+    // Anfang Attribute
+    return 0;
   }
   
   public float getKritischerSchadenProzent(){
-    return kper;
+    return 0;
   }
   
   public float getSeelenwert() {

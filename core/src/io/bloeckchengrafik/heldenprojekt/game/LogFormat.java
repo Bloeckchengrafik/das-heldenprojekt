@@ -23,8 +23,8 @@ public class LogFormat extends Formatter
     public static final String ANSI_WHITE = "\u001B[37m";
   // Ende Attribute
 
-    // Here you can configure the format of the output and 
-    // its color by using the ANSI escape codes defined above.
+    // Here you can configure the format of the output, and
+    // it's color by using the ANSI escape codes defined above.
 
     // format is called for every console log message
   // Anfang Methoden

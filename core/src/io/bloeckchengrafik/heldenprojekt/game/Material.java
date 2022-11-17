@@ -25,8 +25,8 @@ public class Material implements Serializable {
   };
 
   
-  private int bonus;
-  private String name;
+  private final int bonus;
+  private final String name;
   // Ende Attribute
   
   Material(String name, int bonus) {

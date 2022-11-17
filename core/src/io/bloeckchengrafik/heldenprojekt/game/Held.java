@@ -16,8 +16,8 @@ public class Held extends Entity {
   private String name;
   private Waffe waffe;
   
-  private static Logger logger = LogFormat.getLogger(Held.class);
-  private Waffenstapel waffenstapel = new Waffenstapel();
+  private static final Logger logger = LogFormat.getLogger(Held.class);
+  private final Waffenstapel waffenstapel = new Waffenstapel();
   private float waffenstapelGewicht = 0;
   // Ende Attribute
   

@@ -11,7 +11,7 @@ import java.util.function.Function;
  */
 
 public class GruppenBuilder {
-    private int len;
+    private final int len;
     private Function<Integer, Entity> factory;
     
     public GruppenBuilder(int len) {

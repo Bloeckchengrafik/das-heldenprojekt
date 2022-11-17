@@ -17,11 +17,11 @@ import io.bloeckchengrafik.heldenprojekt.world.WorldLoader;
 public class Heldenprojekt extends ApplicationAdapter {
     private static Heldenprojekt instance;
     private AssetManager assetManager;
-    private SaveFile saveFile = new SaveFile();
+    private final SaveFile saveFile = new SaveFile();
     private GUI currentGUI;
     private GUI nextGUI;
     private GameGUI ingameGUI;
-    private PlatformProvider platform;
+    private final PlatformProvider platform;
 
     public Heldenprojekt(PlatformProvider platform) {
         this.platform = platform;

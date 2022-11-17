@@ -1,7 +1,5 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
-import java.util.logging.Logger;
-import java.util.Random;
 /**
  *
  * Beschreibung
@@ -13,7 +11,7 @@ import java.util.Random;
 public class Zauberer extends Held {
   
   // Anfang Attribute
-  private int zauberkraft;
+  private final int zauberkraft;
   
   public static final String[] names = {
     "Merlin",
@@ -29,14 +27,6 @@ public class Zauberer extends Held {
   // Anfang Methoden
   private void heilen() {
     this.setLebenspunkte(this.getLebenspunkte() + zauberkraft);
-  }
-
-  public int getZauberkraft() {
-    return zauberkraft;
-  }
-
-  public void setZauberkraft(int zauberkraftNeu) {
-    zauberkraft = zauberkraftNeu;
   }
 
   // Ende Methoden

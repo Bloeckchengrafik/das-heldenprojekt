@@ -6,8 +6,8 @@ import java.util.Random;
 public class Wuerfel implements Serializable {
   
   // Anfang Attribute
-  private int anzahlSeiten;
-  private Random random;
+  private final int anzahlSeiten;
+  private final Random random;
   // Ende Attribute
   
   // Anfang Methoden

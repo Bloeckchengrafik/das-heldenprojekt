@@ -1,8 +1,6 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
-import java.util.Random;
 
 /**
  * Beschreibung
@@ -24,11 +22,10 @@ public class Waffe implements Serializable {
     };
 
 
-    private String name;
+    private final String name;
     private int bonus;
-    private Material material;
-    private int magie;
-    private String lore;
+    private final Material material;
+    private final int magie;
     // Ende Attribute
 
     public Waffe(Material material) {

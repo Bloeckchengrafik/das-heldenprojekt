@@ -64,7 +64,6 @@ public class GameGUI implements GUI {
     //endregion
 
     private HealerGUI healerGUI;
-    private FightGUI fightGUI;
 
     private SaveFile saveFile;
     private GUI backGUI;
@@ -291,7 +290,6 @@ public class GameGUI implements GUI {
                 if (near(campX, campY, evilCastle.getX(), evilCastle.getY())) {
                     backGUI = new FightGUI(this, evilCastle);
                     backGUI.create();
-                    fightGUI = (FightGUI) backGUI;
                     break;
                 }
             }
@@ -452,29 +450,29 @@ public class GameGUI implements GUI {
 
         switch (tile) {
             case 1:
-                drawString("Gebirge", 0, -10);
+                drawString("Gebirge", -10);
                 break;
             case 2:
-                drawString("Strand", 0, -10);
+                drawString("Strand", -10);
                 break;
             case 4:
-                drawString("Grasland", 0, -10);
+                drawString("Grasland", -10);
                 break;
             case 5:
-                drawString("Wald", 0, -10);
+                drawString("Wald", -10);
                 break;
             case 0:
-                drawString("Ozean", 0, -10);
+                drawString("Ozean", -10);
                 break;
         }
 
         if (this.y > 22) {
-            drawString("Feindliches Gebiet", 0, -10-fontLineHeight);
+            drawString("Feindliches Gebiet", -10-fontLineHeight);
         } else {
-            drawString("eigenes Gebiet", 0, -10-fontLineHeight);
+            drawString("eigenes Gebiet", -10-fontLineHeight);
         }
 
-        drawString("Koordinaten: " + this.curX + ", " + this.curY, 0, -10-(fontLineHeight*2));
+        drawString("Koordinaten: " + this.curX + ", " + this.curY, -10-(fontLineHeight*2));
 
         int sidebarX = (int) (21 * 64 * scale + 10);
         int sidebarY = (int) (21 * 64 * scale);
@@ -542,8 +540,8 @@ public class GameGUI implements GUI {
         backGUI = null;
     }
 
-    private void drawString(String string, int x, int y) {
-        drawString(string, x, y, font);
+    private void drawString(String string, int y) {
+        drawString(string, 0, y, font);
     }
 
     private void drawString(String string, int x, int y, BitmapFont font) {
@@ -614,10 +612,6 @@ public class GameGUI implements GUI {
 
         saveFile.getData().setScale(scale);
         saveFile.save();
-    }
-
-    public float getOldScale() {
-        return this.oldScale;
     }
 
     public float getScale() {

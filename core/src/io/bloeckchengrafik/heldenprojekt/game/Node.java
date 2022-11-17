@@ -1,7 +1,6 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 /**
  *
  * Beschreibung
@@ -14,7 +13,7 @@ public class Node implements Serializable {
   
   // Anfang Attribute
   private Node next;
-  private Object object;
+  private final Object object;
   
   // Ende Attribute
   

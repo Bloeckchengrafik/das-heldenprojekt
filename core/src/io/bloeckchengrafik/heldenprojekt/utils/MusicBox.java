@@ -15,7 +15,6 @@ public class MusicBox {
     private Music battle1;
     private Music battle2;
 
-    private boolean usingTheme1 = new Random().nextBoolean();
     private boolean transition = false;
     private float transitionVolume = 0;
     private float transitionVolumeStep = 0.01f;
@@ -40,6 +39,7 @@ public class MusicBox {
         boolean battle1Playing = battle1.isPlaying();
         boolean battle2Playing = battle2.isPlaying();
 
+        boolean usingTheme1 = new Random().nextBoolean();
         if (transition) {
             transitionVolume += transitionVolumeStep;
 

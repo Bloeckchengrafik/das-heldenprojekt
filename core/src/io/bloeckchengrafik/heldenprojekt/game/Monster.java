@@ -9,9 +9,7 @@ package io.bloeckchengrafik.heldenprojekt.game;
  */
 
 public class Monster extends Entity{
-  
-  // Anfang Attribute
-  private Wuerfel wuerfel4 = new Wuerfel(4);
+
   private int bonus;
   // Ende Attribute
   
@@ -21,6 +19,8 @@ public class Monster extends Entity{
   
   public Monster() {
     super(new Wuerfel(4).wuerfeln(), new Wuerfel(4).wuerfeln()+10);
+    // Anfang Attribute
+    Wuerfel wuerfel4 = new Wuerfel(4);
     bonus = wuerfel4.wuerfeln();
   }
 

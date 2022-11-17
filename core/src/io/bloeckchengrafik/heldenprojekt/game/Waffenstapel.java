@@ -1,7 +1,6 @@
 package io.bloeckchengrafik.heldenprojekt.game;
 
 import java.io.Serializable;
-import java.util.Stack;
 /**
  *
  * Beschreibung

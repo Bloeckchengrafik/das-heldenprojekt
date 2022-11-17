@@ -40,7 +40,7 @@ public class LoadingScreenGUI implements GUI {
 
     @Override
     public void update(double deltaTime) {
-        loadingBarWidth = (int) Math.min(getLoaderPos(deltaTime)*400, 400);
+        loadingBarWidth = (int) Math.min(getLoaderPos()*400, 400);
 
         if (assetManager.update() && loadingBarWidth == 400) {
             fadeOut = true;
@@ -97,7 +97,7 @@ public class LoadingScreenGUI implements GUI {
 
     }
 
-    private float getLoaderPos(double deltaTime) {
+    private float getLoaderPos() {
         return (assetManager.getProgress());
     }
 }
