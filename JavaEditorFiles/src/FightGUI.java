@@ -1,15 +1,8 @@
-package io.bloeckchengrafik.heldenprojekt.gui;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
-import io.bloeckchengrafik.heldenprojekt.game.*;
-import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
-import io.bloeckchengrafik.heldenprojekt.utils.MusicBox;
-import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -192,7 +185,7 @@ public class FightGUI implements GUI {
         GUI.renderImageBackground(width, height, uiTextures, spriteBatch, scaledResolution, scale);
 
         // Title
-        bitmapFont.draw(spriteBatch, fightDone? "Kampf abgeschlossen!" : "Kampf! (drücke f um zu starten)", scaledResolution.getCenterX()+30, scaledResolution.getCenterY() + scaledResolution.getMemberHeight() - bitmapFont.getData().lineHeight);
+        bitmapFont.draw(spriteBatch, fightDone? "Kampf abgeschlossen!" : "Kampf! (druecke f um zu starten)", scaledResolution.getCenterX()+30, scaledResolution.getCenterY() + scaledResolution.getMemberHeight() - bitmapFont.getData().lineHeight);
         int sidebarX = -250;
         int sidebarY = (int) (21 * 64 * gameGUI.getScale());
         int lineSpace = -gameGUI.getFontSmLineHeight();

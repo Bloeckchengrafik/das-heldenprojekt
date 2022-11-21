@@ -1,5 +1,3 @@
-package io.bloeckchengrafik.heldenprojekt.gui;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -9,14 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import io.bloeckchengrafik.heldenprojekt.Heldenprojekt;
-import io.bloeckchengrafik.heldenprojekt.game.Entity;
-import io.bloeckchengrafik.heldenprojekt.game.Held;
-import io.bloeckchengrafik.heldenprojekt.save.SaveFile;
-import io.bloeckchengrafik.heldenprojekt.utils.CenteredResolution;
-import io.bloeckchengrafik.heldenprojekt.utils.MusicBox;
-import io.bloeckchengrafik.heldenprojekt.world.EvilCastle;
-import io.bloeckchengrafik.heldenprojekt.world.World;
 
 import java.io.File;
 import java.nio.ByteBuffer;

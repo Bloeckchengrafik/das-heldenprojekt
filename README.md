@@ -12,6 +12,7 @@ hier auf der Umsetzung, nicht primär auf Grafik und Spielspaß.
 - [Keybinds](#keybinds)
 - [Code-Struktur](#code-und-assets)
 - [Musik](#musik)
+- [Java-Editor](#java-editor)
 - [Lizenz](#lizenz)
 
 ## Lokale Installation
@@ -22,12 +23,13 @@ Mac OS X gleich.
 1. Repository klonen oder herunterladen
 2. In das Verzeichnis wechseln
 3. `./gradlew desktop:run` ausführen
-4. Spielen
+4. Anweisungen in [#Musik](#musik) folgen
+5. Spielen
 
 Ist der [Java-Editor](https://javaeditor.org/doku.php) erwünscht, kann auch mittels `./gradlew jar` eine
 Dependency-Datei erstellt werden, die in den Java-Editor importiert werden kann.
 Die weiteren Dateien können dann in den Java-Editor kopiert werden. Bei einer Binärverteilung dieses Projektes wird eine
-entsprechende Datei mitgeliefert.
+entsprechende Datei mitgeliefert. Mehr dazu in der Sektion [Java-Editor](#java-editor).
 
 Der lokale Installationspfad ist `%APPDATA%\Chris B\Heldenprojekt\0.1\` (Windows, kann unter Linux und MacOS abweichen).
 
@@ -203,7 +205,20 @@ heißen `musicSanKen.mp3`, `musicOldStories.mp3`, `musicComeToMyWorld.mp3` und `
 Die Musik ist hier nicht enthalten, da ich nicht die nötigen Rechte habe, diese zu veröffentlichen. Die Musik ist aber
 bei YouTube verfügbar. In der abgegebenen Variante des Spiels ist die Musik enthalten.
 
+## Java-Editor
+
+Um das Projekt im [Java-Editor](https://javaeditor.org/) zu öffnen, muss das Projekt als ZIP-Datei heruntergeladen werden.
+Danach muss das Projekt mit dem Command `./gradlew desktop:dist` kompiliert werden. Dies ist in der vorkompilierten
+Variante des Spiels bereits geschehen und kann ignoriert werden.
+Weiterhin muss die genRPG.html in dem Ordner `JavaEditorFiles` geöffnet werden. Hier muss nun der absolute Pfad zum
+Ordner `JavaEditorFiles/src` eingegeben werden. Nach dem Download kann das Projekt jetzt im Java-Editor geöffnet werden, indem
+die heruntergeladene RPG.uml-Datei geöffnet wird. Im Java-Editor angekommen, müssen jetzt alle Bibliotheken geladen werden.
+Hierfür braucht man zuerst Java 11 oder neuer. In der vorkompilierten Variante gibt es einen Ordner namens jdk, hier ist Java 19
+enthalten. 
+
 ## Lizenz
 
 Das Spiel ist unter der MIT-Lizenz veröffentlicht.
 Nähere Informationen zur Lizenz sind in der Datei `LICENSE` zu finden.
+
+Die Musik wird aus lizenzrechtlichen Grüden nicht veröffentlicht.
