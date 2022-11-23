@@ -94,6 +94,8 @@ Mit der Taste F2 kann ein Screenshot erstellt werden, der im Spieleordner abgele
 
 ## Code und Assets
 
+![UML](doc/diagram.png)
+
 Aktuell wird nur eine Platform unterstützt, der Code ist aber darauf ausgelegt, mehrere Platformen zu unterstützen.
 Denkbar wäre z.B. eine Android, iOS oder Web-Version.
 
